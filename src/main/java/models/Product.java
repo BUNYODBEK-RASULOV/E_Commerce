@@ -11,10 +11,10 @@ import java.util.UUID;
 
 public class Product extends BaseModel {
     private UUID createdById;
-    private UUID brandId;
     private double price;
     private String infoProduct;
-    private UUID discount;
+    private double discount=0; //chegirma % larda (defolt xolda 0 foiz)
+
 
 
 }
