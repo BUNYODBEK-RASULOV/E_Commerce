@@ -1,16 +1,15 @@
 package models;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.util.UUID;
+
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class User extends BaseModel {
-    private String phoneNumber;
-    private String password;
-    private String smsCode;
+@Data
+public class Category extends BaseModel{
+    private UUID categoryId;
+    private String name;
 }
