@@ -1,9 +1,9 @@
-package Model;
+package models;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class BaseModel {
+public abstract class BaseModel {
     protected UUID id;
     protected LocalDate createDate;
     protected LocalDate updateDate;
