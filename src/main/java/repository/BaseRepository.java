@@ -1,8 +1,10 @@
 package repository;
 
+import response.BaseResponse;
+
 import java.util.UUID;
 
-public interface BaseRepository<T, R, RL>  {
+public interface BaseRepository<T, R, RL>  extends BaseResponse {
 
        R  add(T t);
 
