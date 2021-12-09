@@ -19,5 +19,6 @@ public abstract class BaseModel {
 
     {
         this.id=UUID.randomUUID();
+        this.createDate=LocalDate.now();
     }
 }
