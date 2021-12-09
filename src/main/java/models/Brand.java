@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class Brand extends BaseModel {
     private String brandName;
-    private String brand;
+    private String  brand;
     private String infoProduct;
 
 }
