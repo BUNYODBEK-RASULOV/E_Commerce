@@ -7,15 +7,9 @@ import java.util.UUID;
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public class Subcategory {
-        private UUID productId;
+    public class Subcategory extends BaseModel{
         private UUID categoryId;
-        private UUID subcategoryId;
-
-
-        {
-            this.categoryId=UUID.randomUUID();
-        }
+        private String name;
     }
 
 

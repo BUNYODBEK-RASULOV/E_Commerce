@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Brand extends BaseModel {
-    private String brandName;
-    private String  brand;
-    private String infoProduct;
-
+public class CategoryProduct extends BaseModel{
+    private UUID productId;
+    private UUID subCategoryId;
 }
