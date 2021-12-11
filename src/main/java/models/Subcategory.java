@@ -8,14 +8,8 @@ import java.util.UUID;
     @AllArgsConstructor
     @NoArgsConstructor
     public class Subcategory {
-        private UUID productId;
-        private UUID categoryId;
-        private UUID subcategoryId;
-
-
-        {
-            this.categoryId=UUID.randomUUID();
-        }
+        private UUID catId;
+        private String name;
     }
 
 
