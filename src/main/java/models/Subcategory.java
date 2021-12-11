@@ -12,4 +12,6 @@ import java.util.UUID;
         private String name;
     }
 
-
+//okay
+// kurindimi bulli 15 min coffe breakka chiqib kelaylik davom etamiz ok
+//boshladik
