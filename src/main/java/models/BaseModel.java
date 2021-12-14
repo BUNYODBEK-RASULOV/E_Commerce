@@ -20,6 +20,7 @@ public abstract class BaseModel {
 
     {
         this.id = UUID.randomUUID();
+        isActivity = true;
         this.createDate = LocalDate.now();
     }
 }

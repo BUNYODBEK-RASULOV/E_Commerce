@@ -18,6 +18,6 @@ public class Admin extends AutUser {
     private boolean deleteProductIsActivity;
 
     {
-        role= Role.ADMIN;
+        role = Role.ADMIN;
     }
 }

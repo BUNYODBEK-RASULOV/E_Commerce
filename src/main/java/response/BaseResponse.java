@@ -9,9 +9,9 @@ public interface BaseResponse {
     String ERROR_PRODUCT_ALREADY_EXISTS = "\n============ THIS PRODUCT ALREADY EXIST ============\n";
     String ERROR_PRODUCT_NOT_FOUND = "\n============ PRODUCT NOT FOUND ============\n";
     String NO_PRODUCTS = "\n============ NO PRODUCTS ============\n";
-    String ERROR_CATEGORY_IS_ALREADY_EXIST = "CATEGORY IS ALREADY EXIST!";
-    String ERROR_PRODUCT_IS_ALREADY_EXIST = "PRODUCT IS ALREADY EXIST";
-
+    String ERROR_CATEGORY_ALREADY_EXIST = "CATEGORY ALREADY EXISTS!";
+    String ERROR_PRODUCT_ALREADY_EXIST = "PRODUCT ALREADY EXISTS";
+    String ERROR_CATEGORY_IS_NOT_FOUND = "CATEGORY IS NOT FOUND";
     String ERROR_DETAIL_TYPE_NOT_FOUND = "\n============ USER NOT FOUND ============\n";
 
 

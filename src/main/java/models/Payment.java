@@ -7,8 +7,4 @@ public class Payment extends BaseModel{
    private UUID cartID;
    private String cardNumber;
    private BigDecimal paymentAmount;
-   
-   //biron nima yozinchi
-    
-
 }

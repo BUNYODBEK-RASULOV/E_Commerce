@@ -2,7 +2,6 @@ package service;
 
 import models.auth.User;
 import repository.UserRepository;
-
 import java.util.List;
 import java.util.UUID;
 

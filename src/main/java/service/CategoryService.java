@@ -11,7 +11,7 @@ public class CategoryService implements CategoryRepository {
        @Override
        public String add(Category category) {
               if(isCategoryExist(category))
-                     return ERROR_CATEGORY_IS_ALREADY_EXIST;
+                     return ERROR_CATEGORY_ALREADY_EXIST;
               categoryList.add(category);
               return SUCCESS;
        }
@@ -55,6 +55,11 @@ public class CategoryService implements CategoryRepository {
        @Override
        public boolean removeByObj(Category category) {
               return categoryList.remove(category);
+       }
+
+       public String blockCategory(int i){
+             if(i > 0 && i < categoryList.size())return SUCCESS;
+             return ERROR_CATEGORY_IS_NOT_FOUND;
        }
 
        private boolean isCategoryExist(Category category1){

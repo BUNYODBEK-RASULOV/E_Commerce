@@ -1,22 +1,18 @@
 package front;
 
-import com.sun.tools.javac.Main;
-import enums.internationalization.Language;
+
 import models.Cart;
 import models.CartProduct;
 import models.Product;
 import models.auth.User;
-import repository.AuthUserRepository;
-import service.AuthUserService;
 import service.CartProductService;
 import service.CartService;
 import service.ProductService;
 import utils.Input;
 import utils.Print;
-
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
+
 
 public class UserFront {
 

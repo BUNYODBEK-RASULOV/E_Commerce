@@ -12,4 +12,8 @@ public interface AuthUserRepository extends BaseRepository<AutUser,String, List<
     List<AutUser> autUserList=new ArrayList<>();
     void changeLanguage(Language language);
     AutUser findByPhoneNumber(String phoneNumber);
+
+    boolean removeByObj(User user);
+
+    AutUser logIn(String phoneNumber, String password);
 }
