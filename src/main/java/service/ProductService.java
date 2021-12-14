@@ -73,9 +73,9 @@ public class ProductService implements ProductRepository {
        public List<Product> showDiscountList(){
               List<Product> list = new ArrayList<>();
               for (Product product:productList) {
-                     if(product.getDiscount() > 0) {
+           //          if(product.getDiscountID() > 0) {
                            list.add(product);
-                     }
+                    // }
               }return list;
        }
 

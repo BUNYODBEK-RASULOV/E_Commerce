@@ -18,6 +18,4 @@ public class Product extends BaseModel {
     private Brand brand;
     private UUID discountID;
 
-
-
 }

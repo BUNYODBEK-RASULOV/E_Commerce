@@ -1,14 +1,12 @@
 package front;
 
 
-import models.Cart;
 import models.auth.User;
 import response.BaseResponse;
 import service.CartService;
 import service.UserService;
 import utils.Input;
 
-import java.io.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

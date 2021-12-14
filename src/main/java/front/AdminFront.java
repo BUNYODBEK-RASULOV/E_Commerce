@@ -157,7 +157,7 @@ public class AdminFront {
                             return;
                      }
                      subcategory.setName(Input.getStr("Enter name: "));
-                     check =
+                     //check =
                      if (check) System.out.println("This name already exist! Try again.");
                      count++;
 

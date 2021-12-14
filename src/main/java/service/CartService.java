@@ -1,6 +1,6 @@
 package service;
 
-import models.Cart;
+import models.CartProduct;
 import repository.CartRepository;
 
 import java.util.List;
@@ -9,22 +9,22 @@ import java.util.UUID;
 public class CartService implements CartRepository {
 
        @Override
-       public String add(Cart cart) {
+       public String add(CartProduct cartProduct) {
               return null;
        }
 
        @Override
-       public Cart getById(UUID id) {
+       public CartProduct getById(UUID id) {
               return null;
        }
 
        @Override
-       public List<Cart> getList() {
+       public List<CartProduct> getList() {
               return null;
        }
 
        @Override
-       public boolean edit(UUID id, Cart cart) {
+       public boolean edit(UUID id, CartProduct cartProduct) {
               return false;
        }
 
@@ -34,7 +34,7 @@ public class CartService implements CartRepository {
        }
 
        @Override
-       public boolean removeByObj(Cart cart) {
+       public boolean removeByObj(CartProduct cartProduct) {
               return false;
        }
 }

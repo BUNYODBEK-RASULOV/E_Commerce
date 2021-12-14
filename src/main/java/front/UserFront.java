@@ -22,7 +22,6 @@ public class UserFront {
     }
     static ProductService productService = new ProductService();
     static CartService cartService = new CartService();
-    static CartProductService cartProductService = new CartProductService();
     static CategoryService categoryService = new CategoryService();
     static SubCategoryService subCategoryService = new SubCategoryService();
     static CategoryProductService categoryProductService = new CategoryProductService();
@@ -33,7 +32,7 @@ public class UserFront {
         int stepCode = 1;
 
         while (stepCode != 0) {
-            stepCode = Input.getNum("|>1.Discounts\n|>2.Categories\n|>3.Search\n|>4.My Cart\n|>5.Call Back\n");
+            stepCode = Input.getNum("|>1.Discounts\n|>2.Categories\n|>3.Search\n|>4.My Cart\n5.Order History\n");
 
             switch (stepCode) {
                 case 1:
@@ -43,7 +42,7 @@ public class UserFront {
                     withCategories();
                     break;
                 case 3:
-                    // search
+                    withSearch();
                     break;
                 case 4:
 
@@ -62,7 +61,7 @@ public class UserFront {
         }
     }
 
-    public static void buyProduct(List<Product> list, Cart cart){
+    public static void buyProduct(List<Product> list, CartProduct cart){
        int index = Input.getNum("Enter index");
         int choice;
         do {
@@ -76,9 +75,8 @@ public class UserFront {
                     System.out.println(list.get(index));
                     break;
                 case 3:
-                    CartProduct cartProduct = new CartProduct(cart.getId(), list.get(index).getId(),0, LocalDate.now());
-                    cartProduct.setCartID(cart.getUserID());
-                    cartProductService.add(cartProduct);
+                    CartProduct cartProduct = new CartProduct(cart.getUserID(), list.get(index).getId(),0, LocalDate.now());
+
                     break;
             }
         }while (choice != 0);
@@ -141,21 +139,37 @@ public class UserFront {
     }
 
     // Search
-    public static void showProductByName(){
+    public static void withSearch(){
         String stepCode = "";
-
         while (!stepCode.equals("0")){
-            stepCode = Input.getStr("|>Enter product name\n|>0.Back\n");
-            if(stepCode.equals("0"))break;
-            else{
-                List<Product> list = new ArrayList<>();
-                productService.showListByName(stepCode);
-                if(list.size() == 0 ) System.out.println("List is empty!");
-                int ind = 0;
-                for (Product product : list){
-                    System.out.println(ind++ + ". " + product);
+                stepCode = Input.getStr("|>Enter product name\n|>0.Back\n");
+                if(stepCode.equals("0"))break;
+                else{
+                    List<Product> list = new ArrayList<>();
+                    productService.showListByName(stepCode);
+                    if(list.size() == 0 ) System.out.println("List is empty!");
+                    else {
+                        int ind = 0;
+                        for (Product product : list) {
+                            System.out.println(ind++ + ". " + product);
+                        }
+
+                        int choice = Input.getNum("|>Select(0.Back):");
+                        if (choice > 0 && choice <= list.size()) {
+                            //buy
+                        }
+                    }
                 }
             }
         }
+
+    //My Cart
+    public static void withMyCart(){
+        int ind = 0;
+        if(cartService.getList().size() == 0) System.out.println("Your Cart is empty");
+        for (CartProduct cardProduct: cartService.getList()) {
+            System.out.println(ind++ + ". " + cardProduct);
+        }
     }
 }
+
