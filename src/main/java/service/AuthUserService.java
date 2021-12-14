@@ -3,6 +3,7 @@ package service;
 import enums.internationalization.Language;
 import models.auth.AutUser;
 
+import models.auth.User;
 import repository.AuthUserRepository;
 
 
@@ -10,6 +11,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class AuthUserService implements AuthUserRepository {
+
+
+
 
     @Override
     public  void changeLanguage(Language language) {
@@ -19,6 +23,11 @@ public class AuthUserService implements AuthUserRepository {
 //                session.setLanguage(language);
 //            }
         }
+    }
+
+    @Override
+    public boolean removeByObj(AutUser autUser) {
+        return false;
     }
 
     @Override
@@ -34,34 +43,95 @@ public class AuthUserService implements AuthUserRepository {
         return true;
     }
 
-
     @Override
-    public String add(AutUser autUser) {
-        return null;
+    public String add(AutUser user) {
+        if (!checkPhoneNumber(user.getPhoneNumber())){
+            autUserList.add(user);
+            return SUCCESS;
+        }
+        return ERROR_USER_ALREADY_EXISTS;
     }
 
     @Override
     public AutUser getById(UUID id) {
+        for (AutUser user: autUserList) {
+            if (user.getId().equals(id)){
+                return user;
+            }
+        }
         return null;
     }
 
     @Override
     public List<AutUser> getList() {
-        return null;
+        return autUserList;
     }
 
     @Override
-    public boolean edit(UUID id, AutUser autUser) {
+    public boolean edit(UUID id, AutUser user) {
+        for (int i = 0; i < autUserList.size(); i++) {
+            if (autUserList.get(i).getId().equals(id)){
+                autUserList.set(i, user);
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean removeById(UUID id) {
+        for (int i = 0; i < autUserList.size(); i++) {
+            if (autUserList.get(i).getId().equals(id)){
+                autUserList.remove(i);
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public boolean removeByObj(AutUser autUser) {
+    public boolean removeByObj(User user) {
+        return autUserList.remove(user);
+    }
+
+    public boolean checkPhoneNumber(String phoneNumber) {
+        if (autUserList == null || autUserList.size() == 0) return false;
+        for (AutUser user: autUserList) {
+            if (user.getPhoneNumber().equals(phoneNumber)){
+                return true;
+            }
+        }
         return false;
     }
+
+
+
+    @Override
+    public AutUser logIn(String phoneNumber, String password) {
+        for (AutUser user : autUserList) {
+            if (user.getPhoneNumber().equals(phoneNumber) && user.getPassword().equals(password))
+                return user;
+        }
+        return null;
+    }
+
+
+
+    public AutUser getUserByPhoneNumber(String phoneNumber) {
+        for (AutUser user : autUserList) {
+            if (user.getPhoneNumber().equals(phoneNumber)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    static public AutUser getUserByID(UUID id) {
+        for (AutUser user: autUserList) {
+            if (user.getId().equals(id))
+                return user;
+        }
+        return null;
+    }
+
 }
