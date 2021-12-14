@@ -12,7 +12,7 @@ public class ProductService implements ProductRepository {
        @Override
        public String add(Product product) {
               if(isProductExist(product))
-                     return ERROR_PRODUCT_IS_ALREADY_EXIST;
+                     return ERROR_PRODUCT_ALREADY_EXIST;
               return SUCCESS;
        }
 
@@ -62,7 +62,7 @@ public class ProductService implements ProductRepository {
               return productList.remove(product);
        }
 
-       private boolean isProductExist(Product product){
+       public boolean isProductExist(Product product){
               for (Product product1: productList) {
                      if(product.getName().equals(product1.getName()))
                             return true;

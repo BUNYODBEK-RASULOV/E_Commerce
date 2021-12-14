@@ -25,4 +25,8 @@ public class Input {
         print(str);
         return SCANNER_STR.nextLine();
     }
+    public static double getDouble(String str) {
+        print(str);
+        return SCANNER_NUM.nextDouble();
+    }
 }

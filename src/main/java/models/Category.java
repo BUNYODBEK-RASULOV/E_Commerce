@@ -12,4 +12,6 @@ import java.util.UUID;
 public class Category extends BaseModel{
     private String info;
 
+
+
 }
