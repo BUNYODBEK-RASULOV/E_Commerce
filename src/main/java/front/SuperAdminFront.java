@@ -80,7 +80,7 @@ public class SuperAdminFront {
        public static void withAdmin(){
               int stepCode = 1;
               while (stepCode != 0){
-                     stepCode = Input.getNum("|>1.Add Admin\n |>2.Edit Admin\n |>3.Admin List\n");
+                     stepCode = Input.getNum("|>1.Add Admin\n|>2.Edit Admin\n|>3.Admin List\n");
                      switch (stepCode) {
                             case 1 -> createAdmin();
                             case 2 -> editAdmin();

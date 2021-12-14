@@ -46,13 +46,14 @@ public class UserFront {
         }
     }
 
-    public static void showDiscounts(){
+    public static List<Product> showDiscounts(){
         int ind = 1;
         List<Product> list = productService.showDiscountList();
         for (Product product: list) {
             if(product.getDiscount() > 0)
                 System.out.println(ind + ". " + product);
         }
+        return list;
     }
 
     public static void buyProduct(List<Product> list, Cart cart){
@@ -73,11 +74,7 @@ public class UserFront {
                     cartProduct.setCartID(cart.getUserID());
                     cartProductService.add(cartProduct);
                     break;
-
             }
         }while (choice != 0);
     }
-
-
-
 }
