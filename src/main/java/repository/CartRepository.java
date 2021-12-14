@@ -1,10 +1,10 @@
 package repository;
 
-import models.Cart;
+import models.CartProduct;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public interface CartRepository extends BaseRepository<Cart, String, List<Cart>> {
-       List<Cart> cartList = new ArrayList<>();
+public interface CartRepository extends BaseRepository<CartProduct, String, List<CartProduct>> {
+       List<CartProduct> cartProductList = new ArrayList<>();
 }

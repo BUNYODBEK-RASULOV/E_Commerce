@@ -10,7 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartProduct {
-       private UUID cartID;
+       private UUID userID;
        private UUID productID;
        private double amount;
        private LocalDate localDate;
