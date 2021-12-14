@@ -11,7 +11,8 @@ public class SubCategoryService implements SubCategoryRepository {
 
        @Override
        public String add(Subcategory subcategory) {
-              return null;
+              if (check(subcategory)) return ERROR_CATEGORY_ALREADY_EXIST;
+              subcategoryList.add(subcategory);
        }
 
        @Override
@@ -21,7 +22,7 @@ public class SubCategoryService implements SubCategoryRepository {
 
        @Override
        public List<Subcategory> getList() {
-              return null;
+              return subcategoryList;
        }
 
        @Override
@@ -48,4 +49,12 @@ public class SubCategoryService implements SubCategoryRepository {
               }
               return list;
        }
+
+       public boolean check(Subcategory subcategory){
+              for (Subcategory subcategory1 : subcategoryList){
+                     if (subcategory.getName().equals(subcategory1.getName())) return true;
+              }
+              return false;
+       }
+
 }

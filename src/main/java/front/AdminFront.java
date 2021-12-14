@@ -4,6 +4,7 @@ import models.Product;
 import models.Subcategory;
 import models.auth.Admin;
 import service.ProductService;
+import service.SubCategoryService;
 import utils.Input;
 
 import java.time.LocalDate;
@@ -11,6 +12,8 @@ import java.util.UUID;
 
 public class AdminFront {
        static ProductService productService = new ProductService();
+       static SubCategoryService subCategoryService = new SubCategoryService();
+
        public static void main(Admin admin) {
               int stepCode = 1;
 
@@ -22,6 +25,7 @@ public class AdminFront {
                                    withProduct(admin.getId());
                                    break;
                             case 2:
+                                   withSubCategory(admin.getId());
                                    break;
                             case 3:
                                    break;
@@ -61,6 +65,7 @@ public class AdminFront {
               boolean check;
               int count = 0;
               do {
+                     check = false;
                      if (count == 3) {
                             System.out.println("Error !!!");
                             return ;
@@ -69,7 +74,7 @@ public class AdminFront {
                      check = productService.isProductExist(product);
                      if (check) System.out.println("This name already exist! Try again.");
                      count++;
-              }while (!check);
+              }while (check);
               product.setCreatedById(adminID);
               product.setPrice(Input.getDouble("Enter price: "));
               product.setCreateDate(LocalDate.now());
@@ -118,7 +123,7 @@ public class AdminFront {
        public static void productList() {
               int ind = 0;
               for (Product product : productService.getList()){
-                     System.out.println(++ind + ") " + product.getName());
+                     System.out.println(++ind + ". " + product.getName());
               }
        }
 
@@ -133,13 +138,16 @@ public class AdminFront {
                              "|>4.SubCategory List\n|>0.Back");
                      switch (stepCode){
                             case 1:
-
+                                   createSubCategory();
                                    break;
                             case 2:
+                                   editSubCategory();
                                    break;
                             case 3:
+                                   deleteSubcategory();
                                    break;
                             case 4:
+                                   subCategoryList();
                                    break;
                      }
               }
@@ -149,7 +157,7 @@ public class AdminFront {
        public static void createSubCategory(){
               Subcategory subcategory = new Subcategory();
 
-              boolean check = false;
+              boolean check;
               int count = 0;
               do{
                      if (count == 3){
@@ -157,13 +165,57 @@ public class AdminFront {
                             return;
                      }
                      subcategory.setName(Input.getStr("Enter name: "));
-                     check =
+                     check = subCategoryService.check(subcategory);
                      if (check) System.out.println("This name already exist! Try again.");
                      count++;
 
               }while (!check);
+              subCategoryService.add(subcategory);
        }
 
+       public static void editSubCategory(){
+
+              subCategoryList();
+
+              int choice = Input.getNum("Enter choice: ");
+              Subcategory subcategory = subCategoryService.getList().get(choice);
+              boolean check;
+              int count = 0;
+              do {
+                     check = false;
+                     if (count == 3){
+                            System.out.println("Error !!!");
+                            return ;
+                     }
+                     subcategory.setName(Input.getStr("Enter name: "));
+                     check = subCategoryService.check(subcategory);
+                     if (check) System.out.println("This name already exist! Try again.");
+                     count++;
+              }while(check);
+              subCategoryService.getList().set(choice - 1, subcategory);
+
+       }
+
+       public static void deleteSubcategory(){
+              subCategoryList();
+              int choice = Input.getNum("Enter choice: ");
+              Subcategory subcategory = subCategoryService.getList().get(choice - 1);
+              int ind = 0;
+              for (Subcategory subcategory1 : subCategoryService.getList()){
+                     if (subcategory.getName().equals(subcategory1.getName())){
+                            subcategory1.setActivity(false);
+                            subCategoryService.getList().set(ind, subcategory1);
+                            return ;
+                     }
+              }
+       }
+
+       public static void subCategoryList(){
+              int ind = 0;
+              for (Subcategory subcategory : subCategoryService.getList()){
+                     System.out.println(++ind + ". " + subcategory.getName());
+              }
+       }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
