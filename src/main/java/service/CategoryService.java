@@ -1,6 +1,7 @@
 package service;
 
 import models.Category;
+import models.Subcategory;
 import repository.CategoryRepository;
 
 import java.util.List;
@@ -61,6 +62,8 @@ public class CategoryService implements CategoryRepository {
              if(i > 0 && i < categoryList.size())return SUCCESS;
              return ERROR_CATEGORY_IS_NOT_FOUND;
        }
+
+
 
        private boolean isCategoryExist(Category category1){
               for (Category category: categoryList) {

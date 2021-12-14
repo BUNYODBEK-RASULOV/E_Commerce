@@ -78,4 +78,13 @@ public class ProductService implements ProductRepository {
                      }
               }return list;
        }
+
+       public List<Product> showListByName(String name){
+              List<Product> list = new ArrayList<>();
+              for (Product product:productList) {
+                     if(product.getName().startsWith(name)) {
+                            list.add(product);
+                     }
+              }return list;
+       }
 }

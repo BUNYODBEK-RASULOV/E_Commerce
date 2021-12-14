@@ -1,40 +1,46 @@
 package front;
 
 
-import models.Cart;
-import models.CartProduct;
-import models.Product;
+import enums.auth.Role;
+import enums.internationalization.Language;
+import models.*;
 import models.auth.User;
-import service.CartProductService;
-import service.CartService;
-import service.ProductService;
+import repository.SubCategoryRepository;
+import service.*;
 import utils.Input;
 import utils.Print;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class UserFront {
 
+
+    public static void main(String[] args) {
+        main(new User("bek","1111","1111", Role.User, Language.UZ));
+    }
     static ProductService productService = new ProductService();
     static CartService cartService = new CartService();
     static CartProductService cartProductService = new CartProductService();
+    static CategoryService categoryService = new CategoryService();
+    static SubCategoryService subCategoryService = new SubCategoryService();
+    static CategoryProductService categoryProductService = new CategoryProductService();
+
     public static void main(User user) {
-        Print.print("WELCOME" + user.getName());
+        Print.print("WELCOME " + user.getName() + "\n");
 
         int stepCode = 1;
 
         while (stepCode != 0) {
-            stepCode = Input.getNum("|>1.`Discounts`  |>2.Categories  |>3.Search  |>4.My Cart  |>5.Call Back");
+            stepCode = Input.getNum("|>1.Discounts\n|>2.Categories\n|>3.Search\n|>4.My Cart\n|>5.Call Back\n");
 
             switch (stepCode) {
                 case 1:
-                    showDiscounts();
-
-                    buyProduct(productService.showDiscountList(), cartService.getById(user.getId()));
+                    withDiscounts();
                     break;
                 case 2:
-                    //show categories
+                    withCategories();
                     break;
                 case 3:
                     // search
@@ -46,14 +52,14 @@ public class UserFront {
         }
     }
 
-    public static List<Product> showDiscounts(){
+    // Discounts
+    public static void withDiscounts(){
         int ind = 1;
         List<Product> list = productService.showDiscountList();
+        if(list.size() == 0) System.out.println("List is empty!");
         for (Product product: list) {
-            if(product.getDiscount() > 0)
                 System.out.println(ind + ". " + product);
         }
-        return list;
     }
 
     public static void buyProduct(List<Product> list, Cart cart){
@@ -76,5 +82,80 @@ public class UserFront {
                     break;
             }
         }while (choice != 0);
+    }
+
+    // Categories
+    public static void withCategories(){
+        int ind = 1;
+        List<Category> list = categoryService.getList();
+        for (Category category: list) {
+            System.out.println(ind + ". " + category);
+        }
+        int stepCode = 1;
+        while (stepCode != 0){
+            stepCode = Input.getNum("|>Select: ");
+            if(list.size() == 0) {
+                System.out.println("Category is empty!");
+                break;
+            }
+            else if(stepCode < 0 || list.size() < stepCode) System.out.println("Enter correct value!");
+            else showSubCategories(list.get(stepCode - 1));
+        }
+    }
+
+    private static void showSubCategories(Category category){
+        int ind = 1;
+        List<Subcategory> list = subCategoryService.listSubcategory(category);
+        for (Subcategory subcategory : list) {
+            System.out.println(ind + ". " + subcategory);
+            ind++;
+        }
+
+        int stepCode = 1;
+        while (stepCode != 0){
+            stepCode = Input.getNum("|>Select: ");
+
+            if(stepCode < 0 || list.size() < stepCode) System.out.println("Enter correct value!");
+            else if(stepCode == 0){
+                System.out.println("SubCategory is empty!");
+            break;}
+            else showProducts(list.get(stepCode - 1));
+        }
+    }
+    private static void showProducts(Subcategory subcategory){
+        int ind = 1;
+        List<CategoryProduct> list = categoryProductService.getList();
+        for (CategoryProduct categoryProduct: list) {
+            System.out.println(ind++ + ". " + categoryProductService.getById(categoryProduct.getProductId()));
+        }
+        int stepCode = 1;
+        while (stepCode != 0){
+            stepCode = Input.getNum("|>Select: ");
+
+            if(stepCode < 0 || list.size() < stepCode) System.out.println("Enter correct value!");
+            else if(stepCode == 0){
+                System.out.println("Product List is empty!");
+                break;}
+            else System.out.println("Buy product");;
+        }
+    }
+
+    // Search
+    public static void showProductByName(){
+        String stepCode = "";
+
+        while (!stepCode.equals("0")){
+            stepCode = Input.getStr("|>Enter product name\n|>0.Back\n");
+            if(stepCode.equals("0"))break;
+            else{
+                List<Product> list = new ArrayList<>();
+                productService.showListByName(stepCode);
+                if(list.size() == 0 ) System.out.println("List is empty!");
+                int ind = 0;
+                for (Product product : list){
+                    System.out.println(ind++ + ". " + product);
+                }
+            }
+        }
     }
 }

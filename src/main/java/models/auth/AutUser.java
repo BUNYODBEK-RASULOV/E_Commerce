@@ -19,6 +19,14 @@ public abstract class AutUser extends BaseModel {
     protected Role role;
     protected Language lan;
 
+    public AutUser(String name, String phoneNumber, String password, Role role, Language lan) {
+        super(name);
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.role = role;
+        this.lan = lan;
+    }
+
     {
         role = Role.ANONYMOUS;
     }

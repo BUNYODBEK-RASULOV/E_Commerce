@@ -18,6 +18,10 @@ public abstract class BaseModel {
     protected LocalDate deleteDate;
     protected boolean isActivity;
 
+    public BaseModel(String name) {
+        this.name = name;
+    }
+
     {
         this.id = UUID.randomUUID();
         isActivity = true;
