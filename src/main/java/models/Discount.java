@@ -12,6 +12,7 @@ import java.util.UUID;
 @Data
 
 public class Discount extends BaseModel {
+
     private LocalDate starDate;
     private LocalDate endDate;
     private double discount;

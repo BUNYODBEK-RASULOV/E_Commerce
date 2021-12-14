@@ -7,9 +7,11 @@ import java.util.UUID;
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public class Subcategory extends BaseModel{
-        private UUID categoryId;
+    public class Subcategory {
+        private UUID catId;
         private String name;
     }
 
-
+//okay
+// kurindimi bulli 15 min coffe breakka chiqib kelaylik davom etamiz ok
+//boshladik

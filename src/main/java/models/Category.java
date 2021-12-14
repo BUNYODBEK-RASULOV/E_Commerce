@@ -10,7 +10,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 public class Category extends BaseModel{
-    private UUID categoryId;
     private String name;
 
 }
