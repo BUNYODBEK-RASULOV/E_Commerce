@@ -37,4 +37,8 @@ public class CartService implements CartRepository {
        public boolean removeByObj(CartProduct cartProduct) {
               return false;
        }
+       public List<CartProduct> userCartList(UUID ID) {
+              return null;
+       }
+
 }

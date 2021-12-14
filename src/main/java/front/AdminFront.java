@@ -9,7 +9,15 @@ import utils.Input;
 import java.time.LocalDate;
 import java.util.UUID;
 
+
+
 public class AdminFront {
+
+
+       public static void main(String[] args) {
+              main(new Admin());
+       }
+
        static ProductService productService = new ProductService();
        public static void main(Admin admin) {
               int stepCode = 1;
