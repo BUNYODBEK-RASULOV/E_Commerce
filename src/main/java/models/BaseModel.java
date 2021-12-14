@@ -16,7 +16,7 @@ public abstract class BaseModel {
     protected LocalDate createDate;
     protected LocalDate updateDate;
     protected LocalDate deleteDate;
-    protected boolean isActivity;
+    protected boolean Activity;
 
     public BaseModel(String name) {
         this.name = name;
@@ -24,7 +24,7 @@ public abstract class BaseModel {
 
     {
         this.id = UUID.randomUUID();
-        isActivity = true;
+        this.Activity = true;
         this.createDate = LocalDate.now();
     }
 }
