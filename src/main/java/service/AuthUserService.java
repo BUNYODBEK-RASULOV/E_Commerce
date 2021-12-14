@@ -2,10 +2,9 @@ package service;
 
 import enums.internationalization.Language;
 import models.auth.AutUser;
-import models.auth.User;
+
 import repository.AuthUserRepository;
-import repository.UserRepository;
-import utils.Input;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -15,10 +14,10 @@ public class AuthUserService implements AuthUserRepository {
     @Override
     public  void changeLanguage(Language language) {
         for (AutUser autUser : autUserList) {
-            if (user.getId().equals(session.getId())) {
-                user.setLanguage(language);
-                session.setLanguage(language);
-            }
+//            if (user.getId().equals(session.getId())) {
+//                user.setLanguage(language);
+//                session.setLanguage(language);
+//            }
         }
     }
 
@@ -32,7 +31,7 @@ public class AuthUserService implements AuthUserRepository {
     }
 
     public boolean login() {
-
+        return true;
     }
 
 

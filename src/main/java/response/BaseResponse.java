@@ -10,6 +10,7 @@ public interface BaseResponse {
     String ERROR_PRODUCT_NOT_FOUND = "\n============ PRODUCT NOT FOUND ============\n";
     String NO_PRODUCTS = "\n============ NO PRODUCTS ============\n";
     String ERROR_CATEGORY_IS_ALREADY_EXIST = "CATEGORY IS ALREADY EXIST!";
+    String ERROR_PRODUCT_IS_ALREADY_EXIST = "PRODUCT IS ALREADY EXIST";
 
     String ERROR_DETAIL_TYPE_NOT_FOUND = "\n============ USER NOT FOUND ============\n";
 

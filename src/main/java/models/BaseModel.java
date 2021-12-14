@@ -12,13 +12,14 @@ import java.util.UUID;
 @Data
 public abstract class BaseModel {
     protected UUID id;
+    protected String name;
     protected LocalDate createDate;
     protected LocalDate updateDate;
     protected LocalDate deleteDate;
     protected boolean isActivity;
 
     {
-        this.id=UUID.randomUUID();
-        this.createDate=LocalDate.now();
+        this.id = UUID.randomUUID();
+        this.createDate = LocalDate.now();
     }
 }

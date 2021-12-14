@@ -20,7 +20,7 @@ public abstract class AutUser extends BaseModel {
     protected Language lan;
 
     {
-        role=Role.ANONYMOUS;
+        role = Role.ANONYMOUS;
     }
 
 

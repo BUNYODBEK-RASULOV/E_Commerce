@@ -13,9 +13,11 @@ import models.BaseModel;
 
 public class User extends AutUser {
 
-    private String smsCode;
+    private int smsCode;
+
 
     {
-        role= Role.User;
+        this.smsCode = (int)System.currentTimeMillis() % 10000;
+        role = Role.User;
     }
 }

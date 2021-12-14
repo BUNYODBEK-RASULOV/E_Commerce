@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Brand extends BaseModel {
-    private String brandName;
-    private String  brand;
-    private String infoProduct;
+
+    private String brandInfo;
 
 }
