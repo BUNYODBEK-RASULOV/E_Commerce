@@ -13,6 +13,7 @@ public class SubCategoryService implements SubCategoryRepository {
        public String add(Subcategory subcategory) {
               if (check(subcategory)) return ERROR_CATEGORY_ALREADY_EXIST;
               subcategoryList.add(subcategory);
+              return SUCCESS;
        }
 
        @Override
