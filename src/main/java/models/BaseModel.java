@@ -16,11 +16,11 @@ public abstract class BaseModel {
     protected LocalDate createDate;
     protected LocalDate updateDate;
     protected LocalDate deleteDate;
-    protected boolean isActivity;
+    protected boolean Activity;
 
     {
         this.id = UUID.randomUUID();
-        isActivity = true;
+        this.Activity = true;
         this.createDate = LocalDate.now();
     }
 }

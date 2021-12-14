@@ -16,6 +16,8 @@ public class Product extends BaseModel {
     private double price;
     private String productInfo;
     private Brand brand;
-    private double discount = 0;
+    private UUID discountID;
+
+
 
 }
