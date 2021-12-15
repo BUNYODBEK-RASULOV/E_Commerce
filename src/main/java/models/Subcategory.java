@@ -2,6 +2,7 @@ package models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import response.BaseResponse;
 
 import java.util.UUID;
     @Data
