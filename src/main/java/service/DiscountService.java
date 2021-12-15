@@ -1,6 +1,7 @@
 package service;
 
 import models.Discount;
+import models.Product;
 import repository.DiscountRepository;
 
 import java.util.List;
@@ -47,6 +48,8 @@ public class DiscountService implements DiscountRepository {
               }
               return false;
        }
+
+
 
 
 }

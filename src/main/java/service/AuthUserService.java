@@ -1,6 +1,8 @@
 package service;
 
+import enums.auth.Role;
 import enums.internationalization.Language;
+import models.auth.Admin;
 import models.auth.AutUser;
 
 import models.auth.User;
@@ -12,7 +14,11 @@ import java.util.UUID;
 
 public class AuthUserService implements AuthUserRepository {
 
-
+    {
+        Admin admin = new Admin("Lord", "997098166","7272", Role.SUPER_ADMIN, Language.EN);
+        admin.setRole(Role.SUPER_ADMIN);
+        add(admin);
+    }
 
 
     @Override
@@ -109,7 +115,8 @@ public class AuthUserService implements AuthUserRepository {
     @Override
     public AutUser logIn(String phoneNumber, String password) {
         for (AutUser user : autUserList) {
-            if (user.getPhoneNumber().equals(phoneNumber) && user.getPassword().equals(password))
+            if (user.getPhoneNumber().equals(phoneNumber) &&
+                    user.getPassword().equals(password))
                 return user;
         }
         return null;

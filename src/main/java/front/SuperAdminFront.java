@@ -2,6 +2,7 @@ package front;
 
 import enums.auth.Role;
 import models.Category;
+import models.CategoryProduct;
 import models.auth.Admin;
 import models.auth.AutUser;
 import service.AuthUserService;
@@ -14,11 +15,11 @@ import java.util.List;
 public class SuperAdminFront {
        static CategoryService categoryService = new CategoryService();
        static AuthUserService authUserService = new AuthUserService();
-       public static void main(String[] args) {
+       public static void main() {
               int stepCode = 1;
 
               while (stepCode != 0){
-                     stepCode = Input.getNum("|>1.Category |>2.Admin |>3.History");
+                     stepCode = Input.getNum("|>1.Category\n|>2.Admin\n|>3.History\n");
 
                      switch (stepCode) {
                             case 1 -> withCategory();
@@ -48,7 +49,7 @@ public class SuperAdminFront {
        private static void createCategory(){
               Category category = new Category();
               category.setName(Input.getStr("Enter name: "));
-              category.setInfo("Enter extra info: ");
+              category.setInfo(Input.getStr("Enter extra info: "));
               System.out.println(categoryService.add(category));
        }
 
@@ -56,10 +57,16 @@ public class SuperAdminFront {
 
               showList();
               int choice = Input.getNum("Enter choice: ");
-              Category category = categoryService.getList().get(choice - 1);
-              category.setName(Input.getStr("Enter name: "));
-              category.setInfo("Enter extra info: ");
-              System.out.println(categoryService.edit(category.getId(), category));
+              List<Category> list = categoryService.getList();
+              if(list == null || list.size() == 0) System.out.println("Category is empty!");
+              else if(choice < 0 || choice > list.size())
+                     System.out.println("Enter correct value!");
+              else {
+                     Category category = list.get(choice - 1);
+                     category.setName(Input.getStr("Enter name: "));
+                     category.setInfo("Enter extra info: ");
+                     System.out.println(categoryService.edit(category.getId(), category));
+              }
        }
 
        private static void showList(){
@@ -73,7 +80,7 @@ public class SuperAdminFront {
        private static void deleteCategory(){
               showList();
               int choice = Input.getNum("Enter choice: ");
-              System.out.println(categoryService.blockCategory(choice));
+              System.out.println(categoryService.blockCategory(choice - 1));
        }
 
        // Admin
@@ -118,9 +125,9 @@ public class SuperAdminFront {
               }while (check);
               admin.setPhoneNumber(number);
               admin.setName(Input.getStr("Enter name: "));
-              admin.setCreateCategoryIsActivity(Input.getNum("Can Admin create category?(0 or 1") == 1);
-              admin.setDeleteProductIsActivity(Input.getNum("Can Admin delete product?(0 or 1") == 1);
-              admin.setCreateProductIsActivity(Input.getNum("Can Admin create product?(0 or 1") == 1);
+              admin.setCreateCategoryIsActivity(Input.getNum("Can Admin create category?(0 or 1)") == 1);
+              admin.setDeleteProductIsActivity(Input.getNum("Can Admin delete product?(0 or 1)") == 1);
+              admin.setCreateProductIsActivity(Input.getNum("Can Admin create product?(0 or 1)") == 1);
               System.out.println(authUserService.edit(admin.getId(), admin));
        }private static List<Admin> showAdminList(){
               int ind = 1;

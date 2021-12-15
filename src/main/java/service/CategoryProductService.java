@@ -2,6 +2,7 @@ package service;
 
 import models.CategoryProduct;
 import models.Subcategory;
+import repository.CategoryProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;

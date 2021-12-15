@@ -12,6 +12,13 @@ import java.util.UUID;
 public class Category extends BaseModel{
     private String info;
 
-
-
+    @Override
+    public String toString() {
+        return "Category{" +
+                "name='" + name + '\'' +
+                ", createDate=" + createDate +
+                ", Activity=" + Activity +
+                ", info='" + info + '\'' +
+                '}';
+    }
 }

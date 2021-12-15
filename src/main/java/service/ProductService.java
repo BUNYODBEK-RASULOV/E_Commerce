@@ -70,13 +70,13 @@ public class ProductService implements ProductRepository {
               return false;
        }
 
-       public List<Product> showDiscountList(){
-              List<Product> list = new ArrayList<>();
+       public List<Product> showDiscountList(UUID ID){
+             List<Product> list = new ArrayList<>();
               for (Product product:productList) {
-           //          if(product.getDiscountID() > 0) {
-                           list.add(product);
-                    // }
-              }return list;
+                     if(product.getId().equals(ID))
+                            list.add(product);
+              }
+              return list;
        }
 
        public List<Product> showListByName(String name){

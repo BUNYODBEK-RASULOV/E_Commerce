@@ -59,7 +59,12 @@ public class CategoryService implements CategoryRepository {
        }
 
        public String blockCategory(int i){
-             if(i > 0 && i < categoryList.size())return SUCCESS;
+             if(i >= 0 && i < categoryList.size()) {
+                    Category category = categoryList.get(i);
+                    category.setActivity(false);
+                    categoryList.set(i, category);
+                    return SUCCESS;
+             }
              return ERROR_CATEGORY_IS_NOT_FOUND;
        }
 

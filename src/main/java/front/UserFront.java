@@ -21,6 +21,7 @@ public class UserFront {
     }
     static ProductService productService = new ProductService();
     static CartService cartService = new CartService();
+    static DiscountService discountService = new DiscountService();
     static CategoryService categoryService = new CategoryService();
     static SubCategoryService subCategoryService = new SubCategoryService();
     static CategoryProductService categoryProductService = new CategoryProductService();
@@ -58,11 +59,12 @@ public class UserFront {
     // Discounts
     public static void withDiscounts(){
         int ind = 1;
-        List<Product> list = productService.showDiscountList();
+        List<Discount> list = discountService.getList();
         if(list.size() == 0) System.out.println("List is empty!");
         else {
-            for (Product product : list) {
-                System.out.println(ind + ". " + product);
+            int cnt = 1;
+            for (Discount discount:list) {
+                System.out.println(cnt++ + ". " + discount);
             }
             int index = Input.getNum("Enter index");
             while (true){
@@ -70,9 +72,31 @@ public class UserFront {
                 else if(index < 1 || index > list.size()){
                     System.out.println("Enter correct value: ");
                 }else{
-                    buyProduct(list.get(index - 1));
+                    showDiscountProducts(list.get((index - 1)));
                     break;
                  }
+
+
+            }
+        }
+    }
+    private static void showDiscountProducts(Discount discount){
+        List<Product> list = productService.showDiscountList(discount.getId());
+        if(list.size() == 0) System.out.println("List is empty!");
+        else {
+            int cnt = 1;
+            for (Product product:list) {
+                System.out.println(cnt++ + ". " + product);
+            }
+            int choice = Input.getNum("Enter index");
+            while (true){
+                if(choice == 0)break;
+                else if(choice < 1 || choice > list.size()){
+                    System.out.println("Enter correct value: ");
+                }else{
+                    buyProduct(list.get(choice - 1));
+                    break;
+                }
 
 
             }

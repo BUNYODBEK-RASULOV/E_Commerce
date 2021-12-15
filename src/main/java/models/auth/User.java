@@ -21,7 +21,7 @@ public class User extends AutUser {
     }
 
     {
-        this.smsCode = (int)System.currentTimeMillis() % 10000;
+        this.smsCode = Math.abs((int) System.currentTimeMillis() % 100000);
         role = Role.User;
     }
 }
