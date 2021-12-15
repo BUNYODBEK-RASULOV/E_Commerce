@@ -36,7 +36,6 @@ public class Authentication implements BaseResponse{
 
                      newUser.setName(Input.getStr("Enter name : "));
                      newUser.setPassword(Input.getStr("Enter password:"));
-                     cartService.add(new Cart(newUser.getId()));
                      System.out.println(userService.add(newUser));
               }
        }

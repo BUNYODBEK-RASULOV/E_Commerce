@@ -12,7 +12,15 @@ import utils.Input;
 import java.time.LocalDate;
 import java.util.UUID;
 
+
+
 public class AdminFront {
+
+
+       public static void main(String[] args) {
+              main(new Admin());
+       }
+
        static ProductService productService = new ProductService();
        static SubCategoryService subCategoryService = new SubCategoryService();
        static DiscountService discountService = new DiscountService();
