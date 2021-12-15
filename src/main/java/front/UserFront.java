@@ -1,19 +1,15 @@
 package front;
 
-
 import enums.auth.Role;
 import enums.internationalization.Language;
 import models.*;
 import models.auth.User;
-import repository.SubCategoryRepository;
 import service.*;
 import utils.Input;
 import utils.Print;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 
 
 public class UserFront {

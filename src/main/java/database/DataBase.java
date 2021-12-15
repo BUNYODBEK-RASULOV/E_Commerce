@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface DataBase<T> {
+
     ObjectMapper objectMapper = new ObjectMapper();
     default List<T> readList(){
         try {
