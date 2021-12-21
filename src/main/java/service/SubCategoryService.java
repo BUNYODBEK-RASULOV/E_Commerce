@@ -9,6 +9,12 @@ import java.util.List;
 import java.util.UUID;
 public class SubCategoryService implements SubCategoryRepository {
 
+       private UUID otherSubID;
+       {
+              Subcategory otherSub=new Subcategory(null,"Other");
+              add(otherSub);
+              otherSub.getId();
+       }
        @Override
        public String add(Subcategory subcategory) {
               if (check(subcategory)) return ERROR_CATEGORY_ALREADY_EXIST;
@@ -44,7 +50,8 @@ public class SubCategoryService implements SubCategoryRepository {
        public List<Subcategory> listSubcategory(Category category){
               List<Subcategory> list = new ArrayList<>();
               for (Subcategory subcategory:subcategoryList ) {
-                     if(subcategory.getCatId().equals(category.getId())){
+                     if(subcategory.getCatId().equals(category.getId()) ||
+                            subcategory.getId().equals(otherSubID)){
                             list.add(subcategory);
                      }
               }

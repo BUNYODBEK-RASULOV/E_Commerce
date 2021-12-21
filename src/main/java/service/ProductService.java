@@ -13,6 +13,7 @@ public class ProductService implements ProductRepository {
        public String add(Product product) {
               if(isProductExist(product))
                      return ERROR_PRODUCT_ALREADY_EXIST;
+              productList.add(product);
               return SUCCESS;
        }
 

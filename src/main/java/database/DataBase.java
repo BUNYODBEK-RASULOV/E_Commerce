@@ -14,9 +14,9 @@ import java.util.List;
 public interface DataBase<T> {
 
     ObjectMapper objectMapper = new ObjectMapper();
-    default List<T> readList(){
+    default List<T> readList(String className){
         try {
-            ArrayList<T> list = objectMapper.readValue(new File("D:\\text.json"), new TypeReference<ArrayList<T>>() {
+            ArrayList<T> list = objectMapper.readValue(new File("main/resources/"+className+".json"), new TypeReference<ArrayList<T>>() {
             });
             return list;
         } catch (IOException e) {

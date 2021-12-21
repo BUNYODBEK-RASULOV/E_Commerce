@@ -1,12 +1,8 @@
 package front;
 
-import models.Discount;
-import models.Product;
-import models.Subcategory;
+import models.*;
 import models.auth.Admin;
-import service.DiscountService;
-import service.ProductService;
-import service.SubCategoryService;
+import service.*;
 import utils.Input;
 
 import java.time.LocalDate;
@@ -16,14 +12,11 @@ import java.util.UUID;
 
 public class AdminFront {
 
-
-       public static void main(String[] args) {
-              main(new Admin());
-       }
-
        static ProductService productService = new ProductService();
        static SubCategoryService subCategoryService = new SubCategoryService();
        static DiscountService discountService = new DiscountService();
+       static CategoryProductService categoryProductService = new CategoryProductService();
+       static CategoryService categoryService = new CategoryService();
 
        public static void main(Admin admin) {
               int stepCode = 1;
@@ -51,7 +44,7 @@ public class AdminFront {
 
               while (stepCode != 0){
                      stepCode = Input.getNum("|>1.Create Product\n|>2.Edit Product\n|>3.Delete Product\n" +
-                             "|>4.Product List\n|>0.Back");
+                             "|>4.Give discount\n|>5.List Product\n|>0.Back");
                      switch (stepCode){
                             case 1:
                                    createProduct(adminID);
@@ -63,11 +56,15 @@ public class AdminFront {
                                    deleteProduct();
                                    break;
                             case 4:
+                                   giveDiscount();
+                                   break;
+                            case 5:
                                    productList();
                                    break;
                      }
               }
        }
+
 
        private static void createProduct(UUID adminID){
               Product product = new Product();
@@ -75,7 +72,6 @@ public class AdminFront {
               subCategoryList();
               int choice = Input.getNum("Enter choice: ");
               Subcategory subcategory = subCategoryService.getList().get(choice - 1);
-
 
               boolean check;
               int count = 0;
@@ -94,9 +90,12 @@ public class AdminFront {
               product.setPrice(Input.getDouble("Enter price: "));
               product.setCreateDate(LocalDate.now());
               productService.add(product);
+
+              CategoryProduct categoryProduct = new CategoryProduct();
+              categoryProduct.setProductId(product.getId());
+              categoryProduct.setSubCategoryId(subcategory.getId());
+              categoryProductService.add(categoryProduct);
        }
-
-
 
        private  static  void editProduct(){
 
@@ -135,6 +134,16 @@ public class AdminFront {
               }
        }
 
+       private static void giveDiscount(){
+              discountList();
+              int choice = Input.getNum("Enter choice discount: ");
+              Discount discount = discountService.getList().get(choice);
+
+              productList();
+              choice = Input.getNum("Enter choice product: ");
+              productService.getList().get(choice).setDiscountID(discount.getId());
+       }
+
        public static void productList() {
               int ind = 0;
               for (Product product : productService.getList()){
@@ -170,8 +179,13 @@ public class AdminFront {
 
 
        public static void createSubCategory(){
-              Subcategory subcategory = new Subcategory();
+              int ind = 0;
+              for (Category category : categoryService.getList()){
+                     System.out.println(++ind + ". " + category.getName());
+              }
+              ind = Input.getNum("Enter choice: ");
 
+              Subcategory subcategory = new Subcategory();
               boolean check;
               int count = 0;
               do{
@@ -184,7 +198,8 @@ public class AdminFront {
                      if (check) System.out.println("This name already exist! Try again.");
                      count++;
 
-              }while (!check);
+              }while (check);
+              subcategory.setCatId(categoryService.getList().get(ind - 1).getId());
               subCategoryService.add(subcategory);
        }
 
@@ -275,7 +290,8 @@ public class AdminFront {
                      if (check) System.out.println("This name already exist! Try again.");
                      count++;
 
-              }while (!check);
+              }while (check);
+              discount.setDiscount(Input.getDouble("Enter discount %: "));
               discountService.add(discount);
        }
 
@@ -284,7 +300,7 @@ public class AdminFront {
               discountList();
 
               int choice = Input.getNum("Enter choice: ");
-              Discount discount = discountService.getList().get(choice);
+              Discount discount = discountService.getList().get(choice - 1);
               boolean check;
               int count = 0;
               do {
@@ -298,6 +314,7 @@ public class AdminFront {
                      if (check) System.out.println("This name already exist! Try again.");
                      count++;
               }while(check);
+              discount.setDiscount(Input.getDouble("Enter discount %: "));
               discountService.getList().set(choice - 1, discount);
 
        }
@@ -313,6 +330,7 @@ public class AdminFront {
                             discountService.getList().set(ind, discount1);
                             return ;
                      }
+                     ind++;
               }
        }
 

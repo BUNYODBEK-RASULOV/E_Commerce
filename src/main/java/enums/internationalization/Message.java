@@ -44,11 +44,11 @@ public enum Message {
     LOGOUT("logout", "Chiqish", "Logout", "Выйти"),
     EXIT("exit", "Chiqish", "Logout", "Выйти"),
 
-
+    CHOOSE("choose","Tanlang","Choose", "Выбирать"),
     NAME("name","Nomi","Name ","Имя"),
     NAME_ORG("name","Tashkilotni Nomi","Name organization","Имя организацию"),
-    NOT_CHOICE("choice","Bunday tanlov mavjud","There is such a choice","Есть такой выбор");
-   /// PASSWORD("password","Parol","Password","пароль");
+    NOT_CHOICE("choice","Bunday tanlov mavjud","There is such a choice","Есть такой выбор"),
+    SIGN_IN("signIn", "Tizimga kirish","Sign In" , "Войти");
 
    // LOCALIZATION_NOT_FOUND("LOCALIZATION_NOT_FOUND", "LOCALIZATION_NOT_FOUND", "LOCALIZATION_NOT_FOUND", "LOCALIZATION_NOT_FOUND");
     private final String code;

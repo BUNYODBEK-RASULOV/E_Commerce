@@ -3,6 +3,7 @@ package front;
 import enums.auth.Role;
 import models.Category;
 import models.CategoryProduct;
+import models.Subcategory;
 import models.auth.Admin;
 import models.auth.AutUser;
 import service.AuthUserService;
@@ -48,23 +49,23 @@ public class SuperAdminFront {
 
        private static void createCategory(){
               Category category = new Category();
-              category.setName(Input.getStr("Enter name: "));
-              category.setInfo(Input.getStr("Enter extra info: "));
+              category.setName(Input.getStr("|>Enter name: "));
+              category.setInfo(Input.getStr("|>Enter extra info: "));
               System.out.println(categoryService.add(category));
        }
 
        private static void updateCategory(){
 
               showList();
-              int choice = Input.getNum("Enter choice: ");
+              int choice = Input.getNum("|>Enter choice: ");
               List<Category> list = categoryService.getList();
-              if(list == null || list.size() == 0) System.out.println("Category is empty!");
+              if(list == null || list.size() == 0) System.out.println("|>Category is empty!");
               else if(choice < 0 || choice > list.size())
-                     System.out.println("Enter correct value!");
+                     System.out.println("|>Enter correct value!");
               else {
                      Category category = list.get(choice - 1);
-                     category.setName(Input.getStr("Enter name: "));
-                     category.setInfo("Enter extra info: ");
+                     category.setName(Input.getStr("|>Enter name: "));
+                     category.setInfo("|>Enter extra info: ");
                      System.out.println(categoryService.edit(category.getId(), category));
               }
        }
@@ -79,7 +80,7 @@ public class SuperAdminFront {
 
        private static void deleteCategory(){
               showList();
-              int choice = Input.getNum("Enter choice: ");
+              int choice = Input.getNum("|>Enter choice: ");
               System.out.println(categoryService.blockCategory(choice - 1));
        }
 
@@ -87,7 +88,7 @@ public class SuperAdminFront {
        public static void withAdmin(){
               int stepCode = 1;
               while (stepCode != 0){
-                     stepCode = Input.getNum("|>1.Add Admin\n|>2.Edit Admin\n|>3.Admin List\n");
+                     stepCode = Input.getNum("|>1.Create Admin\n|>2.Edit Admin\n|>3.Admin List\n|>0.Back\n");
                      switch (stepCode) {
                             case 1 -> createAdmin();
                             case 2 -> editAdmin();
@@ -105,10 +106,11 @@ public class SuperAdminFront {
                      check = authUserService.checkPhoneNumber(number);
               }while (check);
               admin.setPhoneNumber(number);
+              admin.setPassword(Input.getStr("Enter password: "));
               admin.setName(Input.getStr("Enter name: "));
-              admin.setCreateCategoryIsActivity(Input.getNum("Can Admin create category?(0 or 1") == 1);
-              admin.setDeleteProductIsActivity(Input.getNum("Can Admin delete product?(0 or 1") == 1);
-              admin.setCreateProductIsActivity(Input.getNum("Can Admin create product?(0 or 1") == 1);
+              admin.setCreateCategoryIsActivity(Input.getNum("Can Admin create category?(0 or 1)") == 1);
+              admin.setDeleteProductIsActivity(Input.getNum("Can Admin delete product?(0 or 1)") == 1);
+              admin.setCreateProductIsActivity(Input.getNum("Can Admin create product?(0 or 1)") == 1);
               System.out.println(authUserService.add(admin));
        }
 
@@ -124,6 +126,7 @@ public class SuperAdminFront {
                      check = authUserService.checkPhoneNumber(number);
               }while (check);
               admin.setPhoneNumber(number);
+              admin.setPassword(Input.getStr("Enter password: "));
               admin.setName(Input.getStr("Enter name: "));
               admin.setCreateCategoryIsActivity(Input.getNum("Can Admin create category?(0 or 1)") == 1);
               admin.setDeleteProductIsActivity(Input.getNum("Can Admin delete product?(0 or 1)") == 1);

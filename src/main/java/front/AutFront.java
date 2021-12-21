@@ -10,7 +10,7 @@ public class AutFront {
        public static AuthUserService authUserService = new AuthUserService();
 
        public static void resetLanguage() {
-              Language.showAll();
+             // Language.showAll();
               String langCode = Input.getStr("?:");
               Language language = Language.findByCode(langCode);
               authUserService.changeLanguage(language);

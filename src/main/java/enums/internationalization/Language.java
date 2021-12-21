@@ -3,6 +3,9 @@ package enums.internationalization;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Getter
 @RequiredArgsConstructor
@@ -12,15 +15,17 @@ public enum Language {
     EN("English");
     private final String code;
 
-    public static void showAll() {
+    public static List<String> getAll() {
+        List<String> list=new ArrayList<>();
         for (Language code : values()) {
-            System.out.println(code);
+            list.add(code.getCode());
         }
+        return list;
     }
 
     public static Language findByCode(String code) {
         for (Language language : values()) {
-            if (language.name().equalsIgnoreCase(code))
+            if (language.getCode().equalsIgnoreCase(code))
                 return language;
         }
         return null;
@@ -28,6 +33,6 @@ public enum Language {
 
     @Override
     public String toString() {
-        return code + " -> " + name();
+        return code ;
     }
 }

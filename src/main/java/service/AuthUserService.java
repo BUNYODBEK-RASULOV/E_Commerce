@@ -1,5 +1,6 @@
 package service;
 
+import database.DataBase;
 import enums.auth.Role;
 import enums.internationalization.Language;
 import models.auth.Admin;
@@ -9,15 +10,19 @@ import models.auth.User;
 import repository.AuthUserRepository;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class AuthUserService implements AuthUserRepository {
+public class AuthUserService implements AuthUserRepository, DataBase<AutUser> {
 
-    {
-        Admin admin = new Admin("Lord", "997098166","7272", Role.SUPER_ADMIN, Language.EN);
-        admin.setRole(Role.SUPER_ADMIN);
-        add(admin);
+
+    List<AutUser> autUserList=readList(this.getClass().getName());
+        {  if(autUserList.isEmpty()) {
+            Admin admin = new Admin("Lord", "997098166", "7272", Role.SUPER_ADMIN, Language.EN);
+            admin.setRole(Role.SUPER_ADMIN);
+            add(admin);
+        }
     }
 
 
@@ -133,7 +138,7 @@ public class AuthUserService implements AuthUserRepository {
         return null;
     }
 
-    static public AutUser getUserByID(UUID id) {
+     public AutUser getUserByID(UUID id) {
         for (AutUser user: autUserList) {
             if (user.getId().equals(id))
                 return user;
